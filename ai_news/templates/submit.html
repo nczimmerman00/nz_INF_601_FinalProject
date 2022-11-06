@@ -5,11 +5,15 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <form method="post">
-    {% csrf_token %}
-        {{ submit_form|crispy }}
-        <input class="btn btn-primary" type="submit">
-    </form>
+    <div class="container py-5">
+        <h1>Submit an Article</h1>
+        <form method="post">
+        {% csrf_token %}
+            {{ submit_form|crispy }}
+            <input class="btn btn-primary mt-2" type="submit">
+        </form>
+        <p>After hitting the submit button, the next page will take some time to load.</p>
+    </div>
 {% else %}
     <p>You need to log in before submitting an article!</p>
     <a href="{% url 'login' %}">Log In</a>
