@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Home page
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.home_view, name='home'),
     # Account registration page
     path("register", views.register_request, name="register"),
     # Login page

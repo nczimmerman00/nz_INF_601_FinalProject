@@ -62,7 +62,7 @@ def submit_article(request):
             new_article.article_title = form.cleaned_data.get('headline')
             new_article.article_category = form.cleaned_data.get('category')
             # Submit headline to AI model to write an article
-            new_article.article_text = generator(new_article.article_title, max_length=150, do_sample=True, temperature=0.9)
+            new_article.article_text = generator(new_article.article_title, max_length=150, do_sample=True, temperature=0.9)[0]['generated_text']
             if request.user.is_authenticated:
                 new_article.article_author = request.user.username
             else:
@@ -74,3 +74,8 @@ def submit_article(request):
             messages.error(request, "Error while submitting article!")
     form = SubmitHeadlineForm()
     return render(request=request, template_name="submit.html", context={"submit_form": form})
+
+
+def home_view(request):
+    articles = Article.objects.all().order_by('-pub_date')
+    return render(request=request, template_name="home.html", context={"articles": articles})
