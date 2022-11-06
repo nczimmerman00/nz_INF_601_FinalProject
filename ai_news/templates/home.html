@@ -5,36 +5,43 @@
 {% block content %}
     <div class="container">
     <ul class="row row-cols-3 list-unstyled d-flex justify-content-center">
-    {% for article in articles %}
-        <li class="col d-flex justify-content-center">
-            <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#modal{{ article.id }}">
-                <h4>{{ article.article_title }}</h4>
-                <h5 class="fw-normal">{{ article.article_category }}</h5>
-                <p class="text-muted">{{ article.pub_date }}</p>
-            </button>
-        </li>
-    {% endfor %}
-    </ul>
-    </div>
-    {% for article in articles %}
-        <div class="modal fade" id="modal{{ article.id }}">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ article.article_title }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Writen by user: {{ article.article_author }}</p>
-                        <p class="text-muted">{{ article.pub_date }}</p>
-                        <br>
-                        {{ article.article_text }}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    {% if articles %}
+        {% for article in articles %}
+            <li class="col d-flex justify-content-center">
+                <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#modal{{ article.id }}">
+                    <h4>{{ article.article_title }}</h4>
+                    <h5 class="fw-normal">{{ article.article_category }}</h5>
+                    <p class="text-muted">{{ article.pub_date }}</p>
+                </button>
+            </li>
+        {% endfor %}
+        </ul>
+        </div>
+        {% for article in articles %}
+            <div class="modal fade" id="modal{{ article.id }}">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ article.article_title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Writen by user: {{ article.article_author }}</p>
+                            <p class="text-muted">{{ article.pub_date }}</p>
+                            <br>
+                            {{ article.article_text }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center">
+            <p>There are currently no articles submitted. Try adding some by clicking the <strong>Submit an
+                Article</strong> button at the top of the page!</p>
         </div>
-    {% endfor %}
+    {% endif %}
 {% endblock %}
