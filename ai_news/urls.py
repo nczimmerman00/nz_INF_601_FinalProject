@@ -5,8 +5,14 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Home page
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    # Account registration page
     path("register", views.register_request, name="register"),
+    # Login page
     path("login", views.login_request, name="login"),
-    path("logout", views.logout_request, name= "logout")
+    # Logout button
+    path("logout", views.logout_request, name="logout"),
+    # Submit article
+    path("submit", views.submit_article, name="submit")
 ]

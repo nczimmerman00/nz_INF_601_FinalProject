@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Submit Article{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <form method="post">
+    {% csrf_token %}
+        {{ submit_form|crispy }}
+        <input class="btn btn-primary" type="submit">
+    </form>
+{% else %}
+    <p>You need to log in before submitting an article!</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
