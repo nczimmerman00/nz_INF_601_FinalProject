@@ -7,7 +7,7 @@
     <ul class="row row-cols-3 list-unstyled d-flex justify-content-center">
     {% if articles %}
         {% for article in articles %}
-            <li class="col d-flex justify-content-center">
+            <li class="col d-flex justify-content-center border">
                 <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#modal{{ article.id }}">
                     <h4>{{ article.article_title }}</h4>
                     <h5 class="fw-normal">{{ article.article_category }}</h5>

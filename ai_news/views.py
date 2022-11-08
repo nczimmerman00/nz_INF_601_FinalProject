@@ -62,7 +62,8 @@ def submit_article(request):
             new_article.article_title = form.cleaned_data.get('headline')
             new_article.article_category = form.cleaned_data.get('category')
             # Submit headline to AI model to write an article
-            new_article.article_text = generator(new_article.article_title, max_length=150, do_sample=True, temperature=0.9)[0]['generated_text']
+            new_article.article_text = generator(new_article.article_title, max_length=750, do_sample=True, temperature=0.9)[0]['generated_text']
+            new_article.article_slug = new_article.article_text[:50]
             if request.user.is_authenticated:
                 new_article.article_author = request.user.username
             else:
