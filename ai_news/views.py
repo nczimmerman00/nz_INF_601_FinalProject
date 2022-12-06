@@ -10,7 +10,9 @@ from transformers import pipeline
 
 # AI content generator
 from transformers import pipeline
+
 generator = pipeline('text-generation', model ='EleutherAI/gpt-neo-125M')
+# generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
 
 
 # Create your views here.
@@ -20,7 +22,7 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Registration successful." )
+            messages.success(request, "Registration successful.")
             return redirect("home")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
@@ -59,10 +61,11 @@ def submit_article(request):
         form = SubmitHeadlineForm(request.POST)
         new_article = Article()
         if form.is_valid():
+            prompt = "Write a news article with the headline "
             new_article.article_title = form.cleaned_data.get('headline')
             new_article.article_category = form.cleaned_data.get('category')
             # Submit headline to AI model to write an article
-            new_article.article_text = generator(new_article.article_title, max_length=750, do_sample=True, temperature=0.9)[0]['generated_text']
+            new_article.article_text = generator(prompt + new_article.article_title, max_length=750, do_sample=True, temperature=0.9)[0]['generated_text'][39:]
             new_article.article_slug = new_article.article_text[:50]
             if request.user.is_authenticated:
                 new_article.article_author = request.user.username
