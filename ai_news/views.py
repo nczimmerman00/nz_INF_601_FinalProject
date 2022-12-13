@@ -83,5 +83,16 @@ def home_view(request):
 
 
 def search(request, search):
+    categories = ['World', 'Politics', 'Economics', 'Entertainment', 'Science', 'Sports', 'Health']
+    if search not in categories:
+        return render(request=request, template_name="404.html")
     articles = Article.objects.filter(article_category=search).values()
     return render(request=request, template_name="home.html", context={"articles": articles})
+
+
+def page_not_found(request):
+    return render(request=request, template_name="404.html")
+
+
+def error_404_view(request, exception):
+    return render(request=request, template_name="404.html")

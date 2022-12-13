@@ -4,8 +4,8 @@
 
 {% block content %}
     <div class="container w-75">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
         {% if articles %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
             <!--Article Cards-->
             {% for article in articles %}
                 <div class="col">
@@ -53,4 +53,5 @@
                 Article</strong> button at the top of the page!</p>
         </div>
     {% endif %}
+    </div>
 {% endblock %}

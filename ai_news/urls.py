@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import TemplateView
 from . import views
 
 urlpatterns = [
@@ -18,3 +17,5 @@ urlpatterns = [
     # Filtered articles
     path("search/<search>", views.search, name='search')
 ]
+
+handler404 = views.error_404_view
