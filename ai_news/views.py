@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import NewUserForm, SubmitHeadlineForm
@@ -6,13 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from .models import Article
-from transformers import pipeline
 
 # AI content generator
 from transformers import pipeline
 
 generator = pipeline('text-generation', model ='EleutherAI/gpt-neo-125M')
-# generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
 
 
 # Create your views here.
@@ -82,4 +79,9 @@ def submit_article(request):
 
 def home_view(request):
     articles = Article.objects.all().order_by('-pub_date')
+    return render(request=request, template_name="home.html", context={"articles": articles})
+
+
+def search(request, search):
+    articles = Article.objects.filter(article_category=search).values()
     return render(request=request, template_name="home.html", context={"articles": articles})

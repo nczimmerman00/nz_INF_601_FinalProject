@@ -14,5 +14,7 @@ urlpatterns = [
     # Logout button
     path("logout", views.logout_request, name="logout"),
     # Submit article
-    path("submit", views.submit_article, name="submit")
+    path("submit", views.submit_article, name="submit"),
+    # Filtered articles
+    path("search/<search>", views.search, name='search')
 ]
