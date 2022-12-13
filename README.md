@@ -1,6 +1,6 @@
 INF601 - Advanced Programming in Python <br />
 Nicholas Zimmerman <br />
-Mini Project 4<br />
+Final Project<br />
 
 <h1 align="center"> Nick's AI Generated News Website</h1>
 <br>
